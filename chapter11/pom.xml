@@ -13,12 +13,27 @@
     <name>Chapter 11. Provided ChannelHandlers and codecs</name>
     <properties>
         <protobuf-java.version>2.5.0</protobuf-java.version>
+        <jboss.marshalling.version>1.4.11.Final</jboss.marshalling.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>${protobuf-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.protobuf.nano</groupId>
+            <artifactId>protobuf-javanano</artifactId>
+            <version>3.0.0-alpha-5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.marshalling</groupId>
+            <artifactId>jboss-marshalling</artifactId>
+            <version>${jboss.marshalling.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
