@@ -11,6 +11,7 @@
  *
  * Listing 4.5 Writing to a Channel {@link nia.chapter4.ChannelOperationExamples#writingToChannel()}
  *
- * Listing 4.6 Using a Channel from many threads {@link nia.chapter4.ChannelOperationExamples#writingToChannelFromManyThreads()}
+ * Listing 4.6 Using a Channel from many threads
+ * {@link nia.chapter4.ChannelOperationExamples#writingToChannelFromManyThreads()}
  */
 package nia.chapter4;

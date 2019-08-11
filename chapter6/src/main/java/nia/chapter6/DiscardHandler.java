@@ -19,4 +19,3 @@ public class DiscardHandler extends ChannelInboundHandlerAdapter {
     }
 
 }
-

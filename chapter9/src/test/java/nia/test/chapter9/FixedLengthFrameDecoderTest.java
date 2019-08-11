@@ -21,22 +21,21 @@ public class FixedLengthFrameDecoderTest {
             buf.writeByte(i);
         }
         ByteBuf input = buf.duplicate();
-        EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+        EmbeddedChannel channel = new EmbeddedChannel(new FixedLengthFrameDecoder(3));
         // write bytes
         assertTrue(channel.writeInbound(input.retain()));
         assertTrue(channel.finish());
 
         // read messages
-        ByteBuf read = (ByteBuf) channel.readInbound();
+        ByteBuf read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 
-        read = (ByteBuf) channel.readInbound();
+        read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 
-        read = (ByteBuf) channel.readInbound();
+        read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 
@@ -52,21 +51,20 @@ public class FixedLengthFrameDecoderTest {
         }
         ByteBuf input = buf.duplicate();
 
-        EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+        EmbeddedChannel channel = new EmbeddedChannel(new FixedLengthFrameDecoder(3));
         assertFalse(channel.writeInbound(input.readBytes(2)));
         assertTrue(channel.writeInbound(input.readBytes(7)));
 
         assertTrue(channel.finish());
-        ByteBuf read = (ByteBuf) channel.readInbound();
+        ByteBuf read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 
-        read = (ByteBuf) channel.readInbound();
+        read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 
-        read = (ByteBuf) channel.readInbound();
+        read = (ByteBuf)channel.readInbound();
         assertEquals(buf.readSlice(3), read);
         read.release();
 

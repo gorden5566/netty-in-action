@@ -7,8 +7,10 @@
  *
  * Listing 7.3 Scheduling a task with EventLoop {@link nia.chapter7.ScheduleExamples#scheduleViaEventLoop()}
  *
- * Listing 7.4 Scheduling a recurring task with EventLoop {@link nia.chapter7.ScheduleExamples#scheduleFixedViaEventLoop()}
+ * Listing 7.4 Scheduling a recurring task with EventLoop
+ * {@link nia.chapter7.ScheduleExamples#scheduleFixedViaEventLoop()}
  *
- * Listing 7.5 Canceling a task using ScheduledFuture {@link nia.chapter7.ScheduleExamples#cancelingTaskUsingScheduledFuture()}
+ * Listing 7.5 Canceling a task using ScheduledFuture
+ * {@link nia.chapter7.ScheduleExamples#cancelingTaskUsingScheduledFuture()}
  */
 package nia.chapter7;

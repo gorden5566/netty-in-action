@@ -13,11 +13,9 @@ import java.util.List;
  */
 public class ByteToCharDecoder extends ByteToMessageDecoder {
     @Override
-    public void decode(ChannelHandlerContext ctx, ByteBuf in,
-        List<Object> out) throws Exception {
+    public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         if (in.readableBytes() >= 2) {
             out.add(in.readChar());
         }
     }
 }
-

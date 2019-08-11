@@ -11,6 +11,7 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
  */
 public class CmdHandlerInitializer extends ChannelInitializer<Channel> {
     private static final byte SPACE = (byte)' ';
+
     @Override
     protected void initChannel(Channel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -42,24 +43,19 @@ public class CmdHandlerInitializer extends ChannelInitializer<Channel> {
         }
 
         @Override
-        protected Object decode(ChannelHandlerContext ctx, ByteBuf buffer)
-            throws Exception {
-            ByteBuf frame = (ByteBuf) super.decode(ctx, buffer);
+        protected Object decode(ChannelHandlerContext ctx, ByteBuf buffer) throws Exception {
+            ByteBuf frame = (ByteBuf)super.decode(ctx, buffer);
             if (frame == null) {
                 return null;
             }
-            int index = frame.indexOf(frame.readerIndex(),
-                    frame.writerIndex(), SPACE);
-            return new Cmd(frame.slice(frame.readerIndex(), index),
-                    frame.slice(index + 1, frame.writerIndex()));
+            int index = frame.indexOf(frame.readerIndex(), frame.writerIndex(), SPACE);
+            return new Cmd(frame.slice(frame.readerIndex(), index), frame.slice(index + 1, frame.writerIndex()));
         }
     }
 
-    public static final class CmdHandler
-        extends SimpleChannelInboundHandler<Cmd> {
+    public static final class CmdHandler extends SimpleChannelInboundHandler<Cmd> {
         @Override
-        public void channelRead0(ChannelHandlerContext ctx, Cmd msg)
-            throws Exception {
+        public void channelRead0(ChannelHandlerContext ctx, Cmd msg) throws Exception {
             // Do something with the command
         }
     }

@@ -10,11 +10,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 @Sharable
-public class SimpleDiscardHandler
-    extends SimpleChannelInboundHandler<Object> {
+public class SimpleDiscardHandler extends SimpleChannelInboundHandler<Object> {
     @Override
-    public void channelRead0(ChannelHandlerContext ctx,
-        Object msg) {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) {
         // No need to do anything special
     }
 }

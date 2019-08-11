@@ -27,21 +27,17 @@ public class GracefulShutdown {
     public void bootstrap() {
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group)
-             .channel(NioSocketChannel.class)
-        //...
-             .handler(
-                new SimpleChannelInboundHandler<ByteBuf>() {
-                    @Override
-                    protected void channelRead0(
-                            ChannelHandlerContext channelHandlerContext,
-                            ByteBuf byteBuf) throws Exception {
-                        System.out.println("Received data");
-                    }
+        bootstrap.group(group).channel(NioSocketChannel.class)
+            // ...
+            .handler(new SimpleChannelInboundHandler<ByteBuf>() {
+                @Override
+                protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf)
+                    throws Exception {
+                    System.out.println("Received data");
                 }
-             );
+            });
         bootstrap.connect(new InetSocketAddress("www.manning.com", 80)).syncUninterruptibly();
-        //,,,
+        // ,,,
         Future<?> future = group.shutdownGracefully();
         // block until the group has shutdown
         future.syncUninterruptibly();

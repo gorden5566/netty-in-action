@@ -22,12 +22,9 @@ public class EchoServer {
         this.port = port;
     }
 
-    public static void main(String[] args)
-        throws Exception {
+    public static void main(String[] args) throws Exception {
         if (args.length != 1) {
-            System.err.println("Usage: " + EchoServer.class.getSimpleName() +
-                " <port>"
-            );
+            System.err.println("Usage: " + EchoServer.class.getSimpleName() + " <port>");
             return;
         }
         int port = Integer.parseInt(args[0]);
@@ -39,22 +36,29 @@ public class EchoServer {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
-            b.group(group)
-                .channel(NioServerSocketChannel.class)
-                .localAddress(new InetSocketAddress(port))
-                .childHandler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    public void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(serverHandler);
-                    }
-                });
+            b.group(group).channel(NioServerSocketChannel.class).localAddress(new InetSocketAddress(port))
+                .childHandler(new ServerChannelInitializer(serverHandler));
 
             ChannelFuture f = b.bind().sync();
-            System.out.println(EchoServer.class.getName() +
-                " started and listening for connections on " + f.channel().localAddress());
+            System.out.println(
+                EchoServer.class.getName() + " started and listening for connections on " + f.channel().localAddress());
             f.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
+        }
+    }
+
+    private static class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
+
+        final EchoServerHandler serverHandler;
+
+        public ServerChannelInitializer(EchoServerHandler serverHandler) {
+            this.serverHandler = serverHandler;
+        }
+
+        @Override
+        protected void initChannel(SocketChannel ch) throws Exception {
+            ch.pipeline().addLast(serverHandler);
         }
     }
 }

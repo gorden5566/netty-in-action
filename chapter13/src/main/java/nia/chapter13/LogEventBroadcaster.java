@@ -24,9 +24,8 @@ public class LogEventBroadcaster {
     public LogEventBroadcaster(InetSocketAddress address, File file) {
         group = new NioEventLoopGroup();
         bootstrap = new Bootstrap();
-        bootstrap.group(group).channel(NioDatagramChannel.class)
-             .option(ChannelOption.SO_BROADCAST, true)
-             .handler(new LogEventEncoder(address));
+        bootstrap.group(group).channel(NioDatagramChannel.class).option(ChannelOption.SO_BROADCAST, true)
+            .handler(new LogEventEncoder(address));
         this.file = file;
     }
 
@@ -44,8 +43,7 @@ public class LogEventBroadcaster {
                 raf.seek(pointer);
                 String line;
                 while ((line = raf.readLine()) != null) {
-                    ch.writeAndFlush(new LogEvent(null, -1,
-                    file.getAbsolutePath(), line));
+                    ch.writeAndFlush(new LogEvent(null, -1, file.getAbsolutePath(), line));
                 }
                 pointer = raf.getFilePointer();
                 raf.close();
@@ -68,12 +66,10 @@ public class LogEventBroadcaster {
             throw new IllegalArgumentException();
         }
         LogEventBroadcaster broadcaster = new LogEventBroadcaster(
-                new InetSocketAddress("255.255.255.255",
-                    Integer.parseInt(args[0])), new File(args[1]));
+            new InetSocketAddress("255.255.255.255", Integer.parseInt(args[0])), new File(args[1]));
         try {
             broadcaster.run();
-        }
-        finally {
+        } finally {
             broadcaster.stop();
         }
     }

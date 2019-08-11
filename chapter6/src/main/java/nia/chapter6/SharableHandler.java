@@ -17,4 +17,3 @@ public class SharableHandler extends ChannelInboundHandlerAdapter {
         ctx.fireChannelRead(msg);
     }
 }
-

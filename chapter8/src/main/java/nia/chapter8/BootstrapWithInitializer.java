@@ -18,11 +18,10 @@ public class BootstrapWithInitializer {
 
     /**
      * Listing 8.6 Bootstrapping and using ChannelInitializer
-     * */
+     */
     public void bootstrap() throws InterruptedException {
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(new NioEventLoopGroup(), new NioEventLoopGroup())
-            .channel(NioServerSocketChannel.class)
+        bootstrap.group(new NioEventLoopGroup(), new NioEventLoopGroup()).channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializerImpl());
         ChannelFuture future = bootstrap.bind(new InetSocketAddress(8080));
         future.sync();
